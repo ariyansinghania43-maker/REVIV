@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVIV — Everything Unfinished Has Value</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --neon-blue: #00f5ff;
+            --deep-purple: #6b21a8;
+        }
+        
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 20px rgb(0 245 255);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1133 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 0 60px -15px rgb(0 245 255);
+        }
+        
+        .hero-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 245, 255, 0.6);
+            animation: floatParticle 25s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-12">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-2xl bg-gradient-to-br from-violet-500 to-cyan-400 flex items-center justify-center text-xl font-bold">R</div>
+                    <div>
+                        <span class="text-3xl font-semibold tracking-tighter" style="font-family: 'Space Grotesk', sans-serif;">REVIV</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#" onclick="navigateTo('home')" class="hover:text-cyan-400 transition-colors">Discover</a>
+                    <a href="#" onclick="navigateTo('explore')" class="hover:text-cyan-400 transition-colors">Marketplace</a>
+                    <a href="#" onclick="navigateTo('graveyard')" class="hover:text-cyan-400 transition-colors">Graveyard</a>
+                    <a href="#" onclick="navigateTo('trending')" class="hover:text-cyan-400 transition-colors">Trending</a>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div onclick="navigateTo('ai-insights')" 
+                     class="px-5 py-2.5 rounded-3xl border border-white/20 hover:border-cyan-400 text-sm flex items-center gap-2 cursor-pointer transition-all">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Insights</span>
+                </div>
+                
+                <button onclick="navigateTo('submit')" 
+                        class="px-6 py-2.5 bg-white text-black rounded-3xl font-semibold flex items-center gap-2 hover:scale-105 transition-all">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Submit Project</span>
+                </button>
+                
+                <div onclick="navigateTo('dashboard')" class="w-9 h-9 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home-page">
+        <!-- HERO -->
+        <section class="min-h-screen gradient-bg flex items-center relative overflow-hidden pt-20">
+            <!-- Particles -->
+            <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+            
+            <div class="max-w-screen-2xl mx-auto px-8 pt-20 pb-32 relative z-10">
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-3xl border border-white/10 bg-white/5 mb-6">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span class="text-sm uppercase tracking-[2px] font-medium">Now in Beta</span>
+                    </div>
+                    
+                    <h1 class="text-7xl md:text-8xl font-semibold leading-none tracking-tighter neon-text" style="font-family: 'Space Grotesk', sans-serif;">
+                        EVERY FAILED IDEA<br>DESERVES A<br><span class="bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent">SECOND CHANCE</span>
+                    </h1>
+                    
+                    <p class="mt-8 text-2xl text-slate-300 max-w-lg">
+                        Buy, revive, and discover abandoned startups, unfinished projects, and unused digital assets.
+                    </p>
+                    
+                    <div class="mt-10 flex items-center gap-4">
+                        <button onclick="navigateTo('explore')" 
+                                class="px-10 py-6 bg-white text-black rounded-3xl text-xl font-semibold flex items-center gap-3 hover:scale-105 transition-all group">
+                            EXPLORE PROJECTS
+                            <span class="text-3xl group-hover:rotate-45 transition-transform">→</span>
+                        </button>
+                        
+                        <button onclick="navigateTo('submit')" 
+                                class="px-10 py-6 border border-white/30 hover:border-white rounded-3xl text-xl font-medium transition-all">
+                            SUBMIT YOURS
+                        </button>
+                    </div>
+                    
+                    <div class="mt-16 flex items-center gap-12 text-sm">
+                        <div>
+                            <div class="text-4xl font-semibold text-cyan-400">248</div>
+                            <div class="text-slate-400">Projects Revived</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-semibold text-violet-400">$2.4M</div>
+                            <div class="text-slate-400">Value Unlocked</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-semibold text-emerald-400">87%</div>
+                            <div class="text-slate-400">Avg Revival Success</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating project cards -->
+            <div class="absolute right-10 bottom-20 hidden xl:block">
+                <div class="glass rounded-3xl p-6 w-80 card-hover" style="transform: rotate(-8deg);">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-lg font-semibold">Pulse — AI Meeting Assistant</div>
+                            <div class="text-emerald-400 text-sm">83% complete • $14,900</div>
+                        </div>
+                        <div class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full">AI Score 94</div>
+                    </div>
+                    <div class="mt-6 h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="h-full w-[83%] bg-gradient-to-r from-cyan-400 to-violet-500"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY REVIV -->
+        <section class="py-32 border-t border-white/10">
+            <div class="max-w-screen-2xl mx-auto px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                    <div>
+                        <div class="uppercase text-cyan-400 tracking-widest text-sm mb-4">THE PROBLEM</div>
+                        <h2 class="text-6xl font-semibold tracking-tight leading-none">Millions of brilliant ideas<br>die in silence.</h2>
+                        <div class="mt-10 space-y-8 text-lg text-slate-300">
+                            <div class="flex gap-6">
+                                <div class="text-5xl font-light text-white/30">01</div>
+                                <div>
+                                    <div class="font-semibold text-xl">Founder burnout kills momentum</div>
+                                    <div class="mt-2">Even the best products get abandoned when life gets in the way.</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="text-5xl font-light text-white/30">02</div>
+                                <div>
+                                    <div class="font-semibold text-xl">Code, designs, users — all lost</div>
+                                    <div class="mt-2">Years of work vanish when a startup fails or a side project stalls.</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="text-5xl font-light text-white/30">03</div>
+                                <div>
+                                    <div class="font-semibold text-xl">The internet has no memory</div>
+                                    <div class="mt-2">REVIV is building the memory layer for digital creation.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-3xl p-12">
+                        <div class="text-center">
+                            <div class="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-cyan-400 via-purple-400 to-violet-400">∞</div>
+                            <div class="mt-8 text-3xl font-medium">Unfinished ≠ Unvaluable</div>
+                            <p class="mt-6 text-slate-400 max-w-md mx-auto">
+                                We believe every abandoned project carries DNA that can become the next unicorn.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        <section class="py-24 bg-zinc-950">
+            <div class="max-w-screen-2xl mx-auto px-8">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <div class="uppercase tracking-widest text-sm text-violet-400">CATEGORIES</div>
+                        <h2 class="text-5xl font-semibold">Find what you need to revive</h2>
+                    </div>
+                    <a onclick="navigateTo('explore')" class="text-cyan-400 flex items-center gap-2 hover:gap-4 transition-all cursor-pointer">
+                        BROWSE ALL <span class="text-xl">→</span>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <!-- Category Cards -->
+                    <div onclick="navigateTo('explore')" class="group glass rounded-3xl p-8 cursor-pointer card-hover border border-transparent hover:border-cyan-400/30">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-rose-400 to-orange-400 flex items-center justify-center text-3xl mb-8">💼</div>
+                        <div class="text-2xl font-semibold">Failed Startups</div>
+                        <div class="text-slate-400 mt-2 text-sm">Complete companies with IP, users &amp; code</div>
+                    </div>
+                    
+                    <div onclick="navigateTo('explore')" class="group glass rounded-3xl p-8 cursor-pointer card-hover border border-transparent hover:border-cyan-400/30">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-3xl mb-8">📱</div>
+                        <div class="text-2xl font-semibold">Unfinished Apps</div>
+                        <div class="text-slate-400 mt-2 text-sm">Mobile &amp; web apps 40-90% complete</div>
+                    </div>
+                    
+                    <div onclick="navigateTo('explore')" class="group glass rounded-3xl p-8 cursor-pointer card-hover border border-transparent hover:border-cyan-400/30">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-3xl mb-8">📺</div>
+                        <div class="text-2xl font-semibold">Dead Channels</div>
+                        <div class="text-slate-400 mt-2 text-sm">YouTube, TikTok &amp; social assets</div>
+                    </div>
+                    
+                    <div onclick="navigateTo('explore')" class="group glass rounded-3xl p-8 cursor-pointer card-hover border border-transparent hover:border-cyan-400/30">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-400 flex items-center justify-center text-3xl mb-8">🌐</div>
+                        <div class="text-2xl font-semibold">Unused Domains</div>
+                        <div class="text-slate-400 mt-2 text-sm">Premium expired &amp; aged domains</div>
+                    </div>
+                    
+                    <div onclick="navigateTo('explore')" class="group glass rounded-3xl p-8 cursor-pointer card-hover border border-transparent hover:border-cyan-400/30">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center text-3xl mb-8">🛠️</div>
+                        <div class="text-2xl font-semibold">Half-Built SaaS</div>
+                        <div class="text-slate-400 mt-2 text-sm">Ready-to-monetize tools</div>
+                    </div>
+                    
+                    <div onclick="navigateTo('explore')" class="group glass rounded-3xl p-8 cursor-pointer card-hover border border-transparent hover:border-cyan-400/30">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-fuchsia-400 to-violet-400 flex items-center justify-center text-3xl mb-8">📦</div>
+                        <div class="text-2xl font-semibold">Digital Assets</div>
+                        <div class="text-slate-400 mt-2 text-sm">Codebases, designs, datasets</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRENDING -->
+        <section class="py-24" id="trending-section">
+            <div class="max-w-screen-2xl mx-auto px-8">
+                <div class="flex items-center justify
